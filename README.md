@@ -1,2 +1,2 @@
 # hack-gt
- We are building a Flutter app to connect people for ridesharing on college campuses
+ We are building a Flutter app to enable ridesharing on college campuses
