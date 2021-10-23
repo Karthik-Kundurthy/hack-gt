@@ -10,8 +10,12 @@ class CreateScreen extends StatefulWidget {
 
 class _CreateScreenState extends State<CreateScreen> {
   final _auth = FirebaseAuth.instance;
-  String email = "";
-  String password = "";
+  String event = "";
+  String origin = "";
+  String date = "";
+  int number_people = 0;
+  String time_leave = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +31,13 @@ class _CreateScreenState extends State<CreateScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.name,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                event = value;
+              },
               decoration: InputDecoration(
-                hintText: 'Enter your email',
+                hintText: 'Event Name',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -51,11 +57,12 @@ class _CreateScreenState extends State<CreateScreen> {
               height: 8.0,
             ),
             TextField(
-              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                date = value;
+              },
               decoration: InputDecoration(
-                hintText: 'Enter your password',
+                hintText: 'Date of Event',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -75,11 +82,12 @@ class _CreateScreenState extends State<CreateScreen> {
               height: 8.0,
             ),
             TextField(
-              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                origin = value;
+              },
               decoration: InputDecoration(
-                hintText: 'Enter your password',
+                hintText: 'Origin',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -99,11 +107,12 @@ class _CreateScreenState extends State<CreateScreen> {
               height: 8.0,
             ),
             TextField(
-              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                number_people = int.parse(value);
+              },
               decoration: InputDecoration(
-                hintText: 'Enter your password',
+                hintText: 'Number of People',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -123,11 +132,12 @@ class _CreateScreenState extends State<CreateScreen> {
               height: 8.0,
             ),
             TextField(
-              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                time_leave = value;
+              },
               decoration: InputDecoration(
-                hintText: 'Enter your password',
+                hintText: 'Time of Departure',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -173,7 +183,9 @@ class _CreateScreenState extends State<CreateScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      },
                       minWidth: 150.0,
                       height: 42.0,
                       child: Text(
