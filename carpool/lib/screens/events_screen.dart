@@ -76,8 +76,8 @@ class _EventsScreenState extends State<EventsScreen> {
                 Navigator.pop(context);
               }),
         ],
-        title: Text('Upcoming events'),
-        backgroundColor: Colors.lightBlueAccent,
+        title: Text('Upcoming Events'),
+        backgroundColor: Colors.blueAccent,
       ),
       body: SafeArea(
         child: Column(
@@ -96,7 +96,7 @@ class _EventsScreenState extends State<EventsScreen> {
                   final messageWidget = Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Material(
-                      color: Colors.blueAccent,
+                      color: Colors.lightBlue[500],
                       elevation: 5.0,
                       child: MaterialButton(
                         onPressed: () async {
@@ -112,12 +112,25 @@ class _EventsScreenState extends State<EventsScreen> {
                         },
                         minWidth: 200.0,
                         height: 125.0,
-                        child: Text(
-                          event['Name'] + "\n" + "\n" + event['Date'],
-                          style: TextStyle(color: Colors.white),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [Text(
+                          event['Name'],
+                          style: TextStyle(color: Colors.white,
+                          fontSize: 30,
+                          fontFamily: "Raleway"
                         ),
                       ),
+                      Text(
+                          event['Date'],
+                          style: TextStyle(color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: "Raleway",
+                          fontStyle: FontStyle.italic
+                        ),
+                      ),],
+                      )
+                        
                     ),
+                  ),
                   );
                   messageWidgets.add(messageWidget);
                 }
