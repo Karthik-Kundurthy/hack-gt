@@ -51,6 +51,11 @@ class _EventsScreenState extends State<EventsScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, 'create_screen');
+              }),
+          IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
                 _auth.signOut();
@@ -81,13 +86,13 @@ class _EventsScreenState extends State<EventsScreen> {
                       elevation: 5.0,
                       child: MaterialButton(
                         onPressed: () async {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) =>
-                                 DetailEventScreen(event.reference.id.toString()),
-                           ),
-                         );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailEventScreen(
+                                  event.reference.id.toString()),
+                            ),
+                          );
                         },
                         minWidth: 200.0,
                         height: 125.0,
