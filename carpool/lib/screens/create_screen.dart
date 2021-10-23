@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool/components/components.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,13 +10,33 @@ class CreateScreen extends StatefulWidget {
 }
 
 class _CreateScreenState extends State<CreateScreen> {
+  late User loggedInUser;
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    final user = _auth.currentUser;
+    try {
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   String event = "";
   String origin = "";
   String date = "";
   int number_people = 0;
   String time_leave = "";
-
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +187,19 @@ class _CreateScreenState extends State<CreateScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        _firestore.collection('Events').add({
+                          'Date': date,
+                          'Location': origin,
+                          'People': number_people,
+                          'Time': time_leave,
+                          'Name': event,
+                          'Owner': loggedInUser.email,
+                          'isFull': false,
+                          'members': [],
+                        });
+                        Navigator.pop(context);
+                      },
                       minWidth: 150.0,
                       height: 42.0,
                       child: Text(
