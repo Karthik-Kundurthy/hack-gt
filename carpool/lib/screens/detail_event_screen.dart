@@ -48,7 +48,7 @@ class DetailEventScreenState extends State<DetailEventScreen> {
       appBar: AppBar(
           title: Text(
         event.Name,
-      )),
+      ), backgroundColor: Colors.blueAccent),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 96.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.start,
