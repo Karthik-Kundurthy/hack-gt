@@ -43,6 +43,11 @@ class _EventsScreenState extends State<EventsScreen> {
                 _auth.signOut();
                 Navigator.pop(context);
               }),
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, 'create_screen');
+              }),
         ],
         title: Text('Carpool'),
         backgroundColor: Colors.lightBlueAccent,
