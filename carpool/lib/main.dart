@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carpool/screens/login_screen.dart';
+import 'package:carpool/screens/registration_screen.dart';
 
 void main() => runApp(Carpool());
 
@@ -7,9 +7,9 @@ class Carpool extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: 'login_screen',
+      initialRoute: 'registration_screen',
       routes: {
-        'login_screen': (context) => LoginScreen(),
+        'registration_screen': (context) => RegistrationScreen(),
       },
     );
   }
