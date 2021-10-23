@@ -1,3 +1,4 @@
+import 'package:carpool/screens/detail_event_screen.dart';
 import 'package:carpool/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool/screens/registration_screen.dart';
@@ -22,6 +23,7 @@ class Carpool extends StatelessWidget {
         'login_screen': (context) => LoginScreen(),
         'registration_screen': (context) => RegistrationScreen(),
         'events_screen': (context) => EventsScreen(),
+        'detail_event_screen': (context) => DetailEventScreen(),
       },
     );
   }
