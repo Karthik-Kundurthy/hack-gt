@@ -16,6 +16,7 @@ void main() async {
 }
 
 class Carpool extends StatelessWidget {
+  String eventID = "asd";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +25,7 @@ class Carpool extends StatelessWidget {
         'login_screen': (context) => LoginScreen(),
         'registration_screen': (context) => RegistrationScreen(),
         'events_screen': (context) => EventsScreen(),
-        'detail_event_screen': (context) => DetailEventScreen(),
+        'detail_event_screen': (context) => DetailEventScreen(eventID),
         'create_screen': (context) => CreateScreen(),
       },
     );
