@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool/constants.dart';
+import 'event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carpool/screens/detail_event_screen.dart';
 
@@ -30,6 +31,19 @@ class _EventsScreenState extends State<EventsScreen> {
         print(event.data());
       }
     }
+  }
+
+  Future<Event> getEvent(String id) async {
+    DocumentSnapshot snap = await _firestore.collection('Events').doc(id).get();
+    return Event(
+      Name: snap['Name'],
+      Owner: snap['Owner'],
+      Date: snap['Date'],
+      Location: snap['Location'],
+      People: snap['People'],
+      Time: snap['Time'],
+      isFull: snap['isFull'],
+    );
   }
 
   void getCurrentUser() async {
@@ -86,11 +100,13 @@ class _EventsScreenState extends State<EventsScreen> {
                       elevation: 5.0,
                       child: MaterialButton(
                         onPressed: () async {
+                          Event checker =
+                              await getEvent(event.reference.id.toString())
+                                  as Event;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetailEventScreen(
-                                  event.reference.id.toString()),
+                              builder: (context) => DetailEventScreen(checker),
                             ),
                           );
                         },
