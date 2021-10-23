@@ -3,6 +3,7 @@ import "package:cloud_firestore/cloud_firestore.dart";
 
 class DetailEventScreen extends StatefulWidget {
   String _eventID = "";
+ 
   DetailEventScreen(String eventID) {
     this._eventID = eventID;
   }
@@ -12,17 +13,18 @@ class DetailEventScreen extends StatefulWidget {
 
 class DetailEventScreenState extends State<DetailEventScreen> {
   String _eventID = "";
-  late DocumentSnapshot event;
+  DocumentSnapshot? event;
   final _firestore = FirebaseFirestore.instance;
 
   DetailEventScreenState(String eventID) {
     this._eventID = eventID;
   }
+
   void initState() {
+    getEvent();
     // TODO: implement initState
     super.initState();
-
-    getEvent();
+    
   }
 
   void getEvent() async {
@@ -47,21 +49,21 @@ class DetailEventScreenState extends State<DetailEventScreen> {
               Text(""),
               Text(""),
               Text(""),
-              Text(event['Name'],
+              Text(event!['Name'],
                   style: TextStyle(
                       fontSize: 31,
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold)),
               Text(""),
-              Text(event['Date'],
+              Text(event!['Date'],
                   style: TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
               Text(""),
               Text(""),
-              Text("Leaving from: " + event['Location'],
+              Text("Leaving from: " + event!['Location'],
                   style: TextStyle(fontSize: 18)),
-              Text("Number of people: " + event['People'],
+              Text("Number of people: ",
                   style: TextStyle(fontSize: 18)),
-              Text("Time: " + event['Time'], style: TextStyle(fontSize: 18)),
+              Text("Time: " + event!['Time'], style: TextStyle(fontSize: 18)),
               Text(""),
               Text(""),
               Padding(
