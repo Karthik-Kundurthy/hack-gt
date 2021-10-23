@@ -1,18 +1,26 @@
 import "package:flutter/material.dart";
 
 class DetailEventScreen extends StatefulWidget {
+  String _eventID = "";
+  DetailEventScreen(String eventID, {String _eventID}) {
+    this._eventID = eventID;
+  }
   @override
-  DetailEventScreenState createState() => DetailEventScreenState();
+  DetailEventScreenState createState() => DetailEventScreenState(_eventID);
 }
 
 class DetailEventScreenState extends State<DetailEventScreen> {
+  String _eventID = "";
+  DetailEventScreenState(String eventID) {
+    this._eventID = eventID;
+  }
   @override
     Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Event",
+          this._eventID,
         ) 
       ), 
       body: Padding(
