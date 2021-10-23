@@ -47,8 +47,9 @@ class DetailEventScreenState extends State<DetailEventScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
           title: Text(
-        event.Name,
-      ), backgroundColor: Colors.blueAccent),
+            event.Name,
+          ),
+          backgroundColor: Colors.blueAccent),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 96.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.start,
@@ -71,7 +72,8 @@ class DetailEventScreenState extends State<DetailEventScreen> {
               Text(""),
               Text("Leaving from: " + event.Location,
                   style: TextStyle(fontSize: 18)),
-              Text("Number of people: ", style: TextStyle(fontSize: 18)),
+              Text("Number of people: " + event.People.toString(),
+                  style: TextStyle(fontSize: 18)),
               Text("Time: " + event.Time, style: TextStyle(fontSize: 18)),
               Text(""),
               Text(""),
