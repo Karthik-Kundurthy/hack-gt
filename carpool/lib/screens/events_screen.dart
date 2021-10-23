@@ -81,13 +81,13 @@ class _EventsScreenState extends State<EventsScreen> {
                       elevation: 5.0,
                       child: MaterialButton(
                         onPressed: () async {
-//                          Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                              builder: (context) =>
-//                                  DetailEventScreen(id: event['id']),
-//                            ),
-//                          );
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) =>
+                                 DetailEventScreen(event.reference.id.toString()),
+                           ),
+                         );
                         },
                         minWidth: 200.0,
                         height: 125.0,
