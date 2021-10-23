@@ -36,6 +36,7 @@ class _EventsScreenState extends State<EventsScreen> {
   Future<Event> getEvent(String id) async {
     DocumentSnapshot snap = await _firestore.collection('Events').doc(id).get();
     return Event(
+      id: snap.reference.id.toString(),
       Name: snap['Name'],
       Owner: snap['Owner'],
       Date: snap['Date'],
@@ -43,6 +44,7 @@ class _EventsScreenState extends State<EventsScreen> {
       People: snap['People'],
       Time: snap['Time'],
       isFull: snap['isFull'],
+      members: snap['members'],
     );
   }
 
@@ -99,38 +101,41 @@ class _EventsScreenState extends State<EventsScreen> {
                       color: Colors.lightBlue[500],
                       elevation: 5.0,
                       child: MaterialButton(
-                        onPressed: () async {
-                          Event checker =
-                              await getEvent(event.reference.id.toString())
-                                  as Event;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailEventScreen(checker),
-                            ),
-                          );
-                        },
-                        minWidth: 200.0,
-                        height: 125.0,
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [Text(
-                          event['Name'],
-                          style: TextStyle(color: Colors.white,
-                          fontSize: 30,
-                          fontFamily: "Raleway"
-                        ),
-                      ),
-                      Text(
-                          event['Date'],
-                          style: TextStyle(color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: "Raleway",
-                          fontStyle: FontStyle.italic
-                        ),
-                      ),],
-                      )
-                        
+                          onPressed: () async {
+                            Event checker =
+                                await getEvent(event.reference.id.toString())
+                                    as Event;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailEventScreen(checker),
+                              ),
+                            );
+                          },
+                          minWidth: 200.0,
+                          height: 125.0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                event['Name'],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontFamily: "Raleway"),
+                              ),
+                              Text(
+                                event['Date'],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: "Raleway",
+                                    fontStyle: FontStyle.italic),
+                              ),
+                            ],
+                          )),
                     ),
-                  ),
                   );
                   messageWidgets.add(messageWidget);
                 }

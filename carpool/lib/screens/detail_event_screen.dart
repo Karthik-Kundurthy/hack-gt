@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "event.dart";
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DetailEventScreen extends StatefulWidget {
   Event event = Event(
+    id: '',
     Name: '',
     Owner: '',
     Date: '',
@@ -11,6 +13,7 @@ class DetailEventScreen extends StatefulWidget {
     People: 0,
     Time: '',
     isFull: false,
+    members: [''],
   );
 
   DetailEventScreen(Event event) {
@@ -22,6 +25,7 @@ class DetailEventScreen extends StatefulWidget {
 
 class DetailEventScreenState extends State<DetailEventScreen> {
   Event event = Event(
+    id: '',
     Name: '',
     Owner: '',
     Date: '',
@@ -29,16 +33,32 @@ class DetailEventScreenState extends State<DetailEventScreen> {
     People: 0,
     Time: '',
     isFull: false,
+    members: [''],
   );
   final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
 
   DetailEventScreenState(Event event) {
     this.event = event;
   }
 
   void initState() {
+    getCurrentUser();
     // TODO: implement initState
     super.initState();
+  }
+
+  void getCurrentUser() async {
+    final user = _auth.currentUser;
+    try {
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -77,25 +97,47 @@ class DetailEventScreenState extends State<DetailEventScreen> {
               Text("Time: " + event.Time, style: TextStyle(fontSize: 18)),
               Text(""),
               Text(""),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Material(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  elevation: 5.0,
-                  child: MaterialButton(
-                    onPressed: () async {
-                      Navigator.pushNamed(context, 'events_screen');
-                    },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                      'Join CarPool',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+              event.isFull
+                  ? Text('Not available to join')
+                  : Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Material(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        elevation: 5.0,
+                        child: MaterialButton(
+                          onPressed: () async {
+                            DocumentSnapshot snap = await _firestore
+                                .collection('Events')
+                                .doc(event.id)
+                                .get();
+                            List temp = snap['members'];
+                            temp.add(loggedInUser.email);
+                            await _firestore
+                                .collection('Events')
+                                .doc(event.id)
+                                .update({
+                              'members': temp,
+                            });
+                            if (snap['members'].length >= snap['People']) {
+                              await _firestore
+                                  .collection('Events')
+                                  .doc(event.id)
+                                  .update({
+                                'isFull': true,
+                              });
+                            }
+                            Navigator.pushNamed(context, 'events_screen');
+                          },
+                          minWidth: 200.0,
+                          height: 42.0,
+                          child: Text(
+                            'Join CarPool',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
             ]),
       ),
     );

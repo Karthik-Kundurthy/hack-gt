@@ -1,4 +1,5 @@
 class Event {
+  String id;
   String Name;
   String Owner;
   String Time;
@@ -6,8 +7,10 @@ class Event {
   String Date;
   String Location;
   bool isFull;
+  List members;
 
   Event({
+    required this.id,
     required this.Name,
     required this.Owner,
     required this.Time,
@@ -15,5 +18,6 @@ class Event {
     required this.Date,
     required this.Location,
     required this.isFull,
+    required this.members,
   });
 }
