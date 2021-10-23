@@ -9,7 +9,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final _auth = FirebaseAuth.instance;
   String email = "";
   String password = "";
