@@ -71,7 +71,7 @@ class DetailEventScreenState extends State<DetailEventScreen> {
           ),
           backgroundColor: Colors.blueAccent),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 96.0),
+        padding: EdgeInsets.symmetric(horizontal: 95.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -82,19 +82,19 @@ class DetailEventScreenState extends State<DetailEventScreen> {
               Text(""),
               Text(event.Name,
                   style: TextStyle(
-                      fontSize: 31,
+                      fontSize: 28,
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold)),
               Text(""),
               Text(event.Date,
-                  style: TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
+                  style: TextStyle(fontSize: 21, fontStyle: FontStyle.italic)),
               Text(""),
               Text(""),
               Text("Leaving from: " + event.Location,
-                  style: TextStyle(fontSize: 18)),
+                  style: TextStyle(fontSize: 16)),
               Text("Number of people: " + event.People.toString(),
-                  style: TextStyle(fontSize: 18)),
-              Text("Time: " + event.Time, style: TextStyle(fontSize: 18)),
+                  style: TextStyle(fontSize: 16)),
+              Text("Time: " + event.Time, style: TextStyle(fontSize: 16)),
               Text(""),
               Text(""),
               event.isFull
