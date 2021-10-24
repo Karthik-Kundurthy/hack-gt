@@ -47,6 +47,7 @@ android {
         applicationId "com.samyakbvs.carpool"
         minSdkVersion 16
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
